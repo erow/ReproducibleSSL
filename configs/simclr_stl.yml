@@ -1,0 +1,20 @@
+epochs: 100
+warmup_epochs: 10
+batch_size: 256
+weight_decay: 1e-4
+accum_iter: 1
+backup: true
+blr: 5e-2
+ckpt_freq: 50
+compile: false
+lr: null
+min_lr: 0.0
+opt: lars
+momentum: 0.9
+seed: 0
+gin: 
+  - build_model.model_fn=@SimCLR
+  - build_backbone.model_name="convnextv2_atto"
+  - build_dataset.transform_fn=@DataAugmentationDINO
+  - DataAugmentationDINO.local_crops_number=0
+data_set: STL
