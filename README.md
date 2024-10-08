@@ -13,5 +13,11 @@ micromamba env create -f environment.yml
 
 
 ```bash
-torchrun main_pretrain.py --config configs/simclr_stl.yml --data_path ~/gent/data --output_dir outputs/simclr_stl 
+torchrun main_pretrain.py --config configs/simclr_stl.yml --data_path ~/data --output_dir outputs/simclr_stl 
 ```
+
+
+
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

@@ -50,7 +50,6 @@ class SimCLR(nn.Module):
     def forward(self, samples, **kwargs):
         self.log = {}
         x1,x2 = samples[:2]
-        local_x = samples[2:]
 
         z1 = self.projector(self.backbone(x1))
         z2 = self.projector(self.backbone(x2))
@@ -58,20 +57,6 @@ class SimCLR(nn.Module):
         loss = (contrastive_loss(z1,z2,self.temperature) + 
                 contrastive_loss(z2,z1,self.temperature))/2
 
-        loss_local = 0
-        for lx in local_x:
-            lz = self.backbone(lx)
-            lp = self.projector(lz)
-
-            loss_local += (
-                contrastive_loss(z1,lp,self.temperature) + 
-                contrastive_loss(lp,z1,self.temperature) + 
-                contrastive_loss(z2,lp,self.temperature) +
-                contrastive_loss(lp,z2,self.temperature)  
-            )/4
-        if loss_local>0:
-            loss = loss + loss_local
-            self.log['loss_local'] = loss_local.item()
         self.log['z@sim'] = F.cosine_similarity(z1,z2).mean().item()
 
         return loss, self.log
