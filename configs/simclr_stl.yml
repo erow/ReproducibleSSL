@@ -17,4 +17,5 @@ gin:
   - build_backbone.model_name="convnextv2_atto"
   - build_dataset.transform_fn=@DataAugmentationDINO
   - DataAugmentationDINO.local_crops_number=0
+  - DataAugmentationDINO.img_size=96
 data_set: STL
