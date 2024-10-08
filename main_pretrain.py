@@ -14,7 +14,7 @@ import numpy as np
 import timm
 import torch
 from PIL import Image  # a trick to solve loading lib problem
-# from torch.utils.tensorboard import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
 
 
 assert timm.__version__ >= "0.6.12"  # version check
